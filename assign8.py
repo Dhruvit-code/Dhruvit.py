@@ -14,7 +14,9 @@
 new_car = Car("ABC-123", 142)
 
 new_car.print_properties()'''
-
+'''import numpy as np
+from contourpy.util import data
+from matplotlib import pyplot as plt'''
 
 '''class Car:
     def __init__(self, registration_number, max_speed):
@@ -243,5 +245,136 @@ def main():
         print("2. Read existing notes")
         print'''
 
+
+'''class Graph:
+    def __init__(self):
+        self.graph = {}
+
+    def add_edge(self, u, v, weight):
+        # Add the edge from u to v
+        if u not in self.graph:
+            self.graph[u] = []
+        self.graph[u].append((v, weight))
+
+        # Since the graph is undirected, add edge from v to u as well
+        if v not in self.graph:
+            self.graph[v] = []
+        self.graph[v].append((u, weight))
+
+    def print_graph(self):
+        for node in self.graph:
+            print(f"{node} -> {self.graph[node]}")
+
+
+# Creating the graph
+g = Graph()
+
+# Adding the edges as per the graph
+g.add_edge('A', 'B', 76)
+g.add_edge('A', 'C', 47)
+g.add_edge('A', 'E', 47)
+g.add_edge('B', 'C', 47)
+g.add_edge('B', 'D', 49)
+g.add_edge('C', 'D', 54)
+g.add_edge('C', 'E', 47)
+
+# Printing the graph
+g.print_graph()'''
+
+'''import pandas as pd
+import matplotlib.pyplot as plt
+data = pd.read_csv("linreg_data.csv",skiprows=0,names=["x","y"])
+print(data)
+A = np.arry([1,2,3],[4,5,6])
+np.sum(A)
+np.sum(A,0)
+np.sum(A,1)
+np.prod(A)
+np.prod(A,0)
+np.prod(A,1)
+np.min(A)
+np.min(A,0)
+np.min(A,1)
+np.max(A)
+np.max(A,0)
+np.max(A,1)
+np.mean(A)
+np.mean(A,0)
+np.mean(A,1)
+np.median (A)
+np.median(A,0)
+np.median(A,1)
+np.std(A)
+np.std(A,0)
+np.std(A,1)
+np.var(A)
+np.var(A,0)
+np.var(A,1)
+xpd = data["x"]
+ypd = data["y"]
+n = xpd.size
+plt.scater(xpd,ypd)
+plt.show()
+xbar = np.scam(xpd)
+ybar = np.scam(ypd)
+term1 = np.sum(xpd)
+term2 = np.sum(ypd)
+term1 = np.sum(xpd*ypd)
+b = (term1-n*xbar*ybar)/(term2-n*xbar*xbar)
+a = ybar - b*xbar
+x = np.linspace(0,2,100)
+y = a+b*x
+plt.plot(x,y,colour="black")
+plt.scatter(xpd,ypd)
+plt.scatter(xbar,ybar,colour="red")
+plt.show()'''
+
+'''import numpy as np
+from sklearn import linear_model
+my_data = np.genfromtxt("linreg_data.csv",delimiter=",")
+xp = my_data[:,0]
+yp = my_data[:,1]
+xp = xp.reshape(-1,1)
+yp = yp.reshape(-1,1)
+regr = linear_model.LinearRegression()
+regr.fit(xp,yp)
+print(regr.coef_,regr.intercept_)
+xval = np.full ((1,1),0.5)
+yval = regr.predict(xval)
+print(yval)
+xval = np.linspace (-1,2,20).reshape(-1,1)
+yval = regr.predict(xval)
+plt.plot(xval,yval)
+plt.scatter(xp,yp,color='red')
+plt.show()
+from sklearn import metrics
+yhat = regr.predict(xp)
+print('Mean Absolute error: ', metrics.mean_absolute_error(yp,yhat))
+print('Mean Squared error: ', metrics.mean_squared_error(yp,yhat))
+print('Root mean squared error: ', metrics.root_mean_squared_error(yp,yhat))
+print('R2 value: ', metrics.r2_score(yp,yhat))'''
+
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import PolynomialFeatures
+data_pd = pd.read_csv("quadreg_data.csv",skiprows=0,names=["x","y"])
+print(data_pd)
+
+xpd = np.array(data_pd["x"])
+ypd = np.array(data_pd["y"])
+xpd = xpd.reshape(-1,1)
+ypd = ypd.reshape(-1,1)
+poly_reg = PolynomialFeatures(degree=2)
+X_poly = poly_reg.fit_transform(xpd)
+pol_reg = LinearRegression()
+pol_reg.fit(X_poly,ypd)
+plt.scatter(xpd,ypd, color='red')
+xval = np.linspace(-1,1,10).reshape(-1,1)
+plt.plot(xval,pol_reg.predict(poly_reg.transform(xval)), color="blue")
+plt.show()
+print(pol_reg.coef_)
+print("c=",pol_reg.intercept_)
 
 
